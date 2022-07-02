@@ -1,6 +1,11 @@
 // ignore_for_file: file_names
 
 import 'package:easy_sidemenu/easy_sidemenu.dart';
+import 'package:ecommerce_website/Screens/Complaints.dart';
+import 'package:ecommerce_website/Screens/KycVerification.dart';
+import 'package:ecommerce_website/Screens/Notificatin.dart';
+import 'package:ecommerce_website/Screens/Product.dart';
+import 'package:ecommerce_website/Screens/Venders.dart';
 import 'package:ecommerce_website/Utils/Dimentions.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -29,7 +34,6 @@ class _HomeState extends State<Home> {
             //   print(mode);
             // },
             style: SideMenuStyle(
-              unselectedTitleTextStyle: const TextStyle(color: Colors.grey),
               displayMode: SideMenuDisplayMode.auto,
               hoverColor: Colors.blue[100],
               selectedColor: Colors.lightBlue,
@@ -46,8 +50,7 @@ class _HomeState extends State<Home> {
                   ),
                   child: Text(
                     "Ecommerce",
-                    style: GoogleFonts.comfortaa(
-                        fontSize: 23, color: Colors.white),
+                    style: GoogleFonts.lato(fontSize: 23, color: Colors.white),
                   ),
                 ),
                 const Divider(
@@ -74,9 +77,9 @@ class _HomeState extends State<Home> {
               ),
               SideMenuItem(
                 priority: 2,
-                title: 'Customer',
+                title: 'Kyc Verification',
                 onTap: () {
-                  page.jumpToPage(2);
+                  page.jumpToPage(1);
                 },
                 icon: const Icon(Icons.people),
               ),
@@ -84,7 +87,7 @@ class _HomeState extends State<Home> {
                 priority: 3,
                 title: 'Venders',
                 onTap: () {
-                  page.jumpToPage(3);
+                  page.jumpToPage(2);
                 },
                 icon: const Icon(Icons.people),
               ),
@@ -92,7 +95,7 @@ class _HomeState extends State<Home> {
                 priority: 4,
                 title: 'Product',
                 onTap: () {
-                  page.jumpToPage(4);
+                  page.jumpToPage(3);
                 },
                 icon: const Icon(Icons.shopping_cart),
               ),
@@ -100,7 +103,7 @@ class _HomeState extends State<Home> {
                 priority: 5,
                 title: 'Complaints',
                 onTap: () {
-                  page.jumpToPage(5);
+                  page.jumpToPage(4);
                 },
                 icon: const Icon(Icons.bubble_chart),
               ),
@@ -108,7 +111,7 @@ class _HomeState extends State<Home> {
                 priority: 6,
                 title: 'Notifications',
                 onTap: () {
-                  page.jumpToPage(6);
+                  page.jumpToPage(5);
                 },
                 icon: const Icon(Icons.notifications),
               ),
@@ -117,44 +120,13 @@ class _HomeState extends State<Home> {
           Expanded(
             child: PageView(
               controller: page,
-              children: [
-                const DashBoard(),
-                Container(
-                  color: Colors.white,
-                  child: const Center(
-                    child: Text(
-                      'Users',
-                      style: TextStyle(fontSize: 35),
-                    ),
-                  ),
-                ),
-                Container(
-                  color: Colors.white,
-                  child: const Center(
-                    child: Text(
-                      'Files',
-                      style: TextStyle(fontSize: 35),
-                    ),
-                  ),
-                ),
-                Container(
-                  color: Colors.white,
-                  child: const Center(
-                    child: Text(
-                      'Download',
-                      style: TextStyle(fontSize: 35),
-                    ),
-                  ),
-                ),
-                Container(
-                  color: Colors.white,
-                  child: const Center(
-                    child: Text(
-                      'Settings',
-                      style: TextStyle(fontSize: 35),
-                    ),
-                  ),
-                ),
+              children: const [
+                DashBoard(),
+                KycVerification(),
+                VendersPage(),
+                ProductScreen(),
+                ComplaintsScreen(),
+                NotificationScreen()
               ],
             ),
           ),

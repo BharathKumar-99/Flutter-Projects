@@ -52,10 +52,4 @@ class DashBoardController extends GetxController {
       venderctl.addAll(value);
     });
   }
-
-  @override
-  void onInit() {
-    super.onInit();
-    _loaddata();
-  }
 }

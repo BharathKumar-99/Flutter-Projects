@@ -40,6 +40,10 @@ dependencies:
   dependencies:
   syncfusion_flutter_charts: ^20.1.61
   easy_sidemenu: ^0.3.1
+  auto_size_text: ^3.0.0
+  image_picker: ^0.8.5+3
+  dio: ^4.0.6
+  
 
 dev_dependencies:
   flutter_test:
