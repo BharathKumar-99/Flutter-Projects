@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 
 import '../Model/vender_model.dart';
@@ -8,34 +9,47 @@ import 'connections.dart';
 
 class VenderStatus {
   static var client = http.Client();
+  static var dio = Dio();
 
   static approve(String email) async {
-    await client.post(Uri.parse(Connection.acceptvender),
-        body: {email: email}).then((value) => {log(value.body)});
+    await dio.post(Connection.acceptvender,
+        data: {"email": email}).then((value) => {log(value.data)});
   }
 
   static reject(String email) async {
-    await client.post(Uri.parse(Connection.rejectvender),
-        body: {email: email}).then((value) => {log(value.body)});
+    await dio.post(Connection.rejectvender,
+        data: {"email": email}).then((value) => {log(value.data)});
   }
 
   static approvedvender() async {
     List<VenderModel> model = [];
-    await client.get(Uri.parse(Connection.getapprovedvender)).then((value) => {
-          print(value.body),
-        });
+    try {
+      await client
+          .get(Uri.parse(Connection.getapprovedvender))
+          .then((value) => {
+                for (var item in json.decode(value.body))
+                  model.add(VenderModel.fromJson(item)),
+              });
+    } catch (e) {
+      log("approve$e");
+    }
+    return model;
   }
 
   static pendingvender() async {
     List<VenderModel> model = [];
     try {
       await client.get(Uri.parse(Connection.getpendingvender)).then((value) => {
-            print(value.body),
-            for (var item in json.decode("[${value.body}]"))
-              model.add(VenderModel.fromJson(item)),
+            if (value.body == "[]")
+              {
+                model = [],
+              }
+            else
+              for (var item in json.decode(value.body))
+                model.add(VenderModel.fromJson(item)),
           });
     } catch (e) {
-      log(e.toString());
+      log("pen$e");
     }
     return model;
   }

@@ -1,11 +1,15 @@
+import 'package:admin_panel/Controller/complaintcontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/get_navigation.dart';
 
+import 'Controller/productscontroller.dart';
 import 'Screen/sidenavscreen.dart';
 
 void main() {
   runApp(const MyApp());
+
+  final productController = Get.put(ProductController());
+  final complaints = Get.put(ComplaintController());
 }
 
 class MyApp extends StatelessWidget {

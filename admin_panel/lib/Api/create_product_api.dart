@@ -16,34 +16,14 @@ class CreateproductApi {
     List<int> list = productimg.cast();
     request.files
         .add(http.MultipartFile.fromBytes("ppic", list, filename: "myimg.png"));
+    request.fields["pname"] = name;
+    request.fields["pdescr"] = description;
 
-    var result = await request.send();
-    var picnaem = "";
-    result.stream.bytesToString().asStream().listen((event) {
-      picnaem = event;
-    });
-    cp(name, description, price, quantity, picnaem, barcode);
+    request.fields["pbarcode"] = barcode.toString();
+    request.fields["pprice"] = price.toString();
+    request.fields["pquantity"] = quantity.toString();
+    var result = await request.send().then((value) => {print(value.stream)});
+
     return result;
-  }
-
-  static cp(String name, String description, int price, int quantity,
-      String productimg, int barcode) async {
-    Map<String, dynamic> data = {
-      "pname": name,
-      "pdescr": description,
-      "ppic": productimg,
-      "pbarcode": barcode,
-      "pprice": price,
-      "pquantity": quantity
-    };
-    var result = await client
-        .post(
-            Uri.parse(
-              Connection.createproduct,
-            ),
-            body: data)
-        .then((value) {
-      print(value.body);
-    });
   }
 }

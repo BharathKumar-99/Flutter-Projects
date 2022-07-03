@@ -5,17 +5,28 @@ import '../Model/vender_model.dart';
 
 class VendersController extends GetxController {
   var kycpending = <VenderModel>[].obs;
+  var approvedvender = <VenderModel>[].obs;
 
   @override
   void onInit() {
-    _loaddata();
+    loaddata();
     super.onInit();
   }
 
-  _loaddata() async {
+  loaddata() async {
+    if (kycpending.isEmpty) {
+      kycpending.clear();
+    }
+    if (approvedvender.isEmpty) {
+      approvedvender.clear();
+    }
+
     await VenderStatus.pendingvender().then((value) {
       kycpending.addAll(value);
-      print(kycpending[1].name);
+    });
+
+    await VenderStatus.approvedvender().then((value) {
+      approvedvender.addAll(value);
     });
   }
 }

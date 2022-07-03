@@ -1,8 +1,11 @@
+import 'package:admin_panel/Screen/ProductScreen.dart';
 import 'package:admin_panel/Screen/venderaproved.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'complaintspage.dart';
+import 'createproductscreen.dart';
 import 'dash_board.dart';
 import 'kyc_verification.dart';
 
@@ -115,7 +118,7 @@ class _SideNavScreenState extends State<SideNavScreen> {
                 icon: const Icon(Icons.notifications),
               ),
               SideMenuItem(
-                priority: 5,
+                priority: 6,
                 title: 'Create Product',
                 onTap: () {
                   page.jumpToPage(6);
@@ -137,24 +140,18 @@ class _SideNavScreenState extends State<SideNavScreen> {
                 const Dashboard(),
                 const KycVerification(),
                 const VenderApprovedList(),
+                const ProductPage(),
+                const ComplaintsScreen(),
                 Container(
                   color: Colors.white,
                   child: const Center(
                     child: Text(
-                      'Download',
+                      'No New Notifications',
                       style: TextStyle(fontSize: 35),
                     ),
                   ),
                 ),
-                Container(
-                  color: Colors.white,
-                  child: const Center(
-                    child: Text(
-                      'Settings',
-                      style: TextStyle(fontSize: 35),
-                    ),
-                  ),
-                ),
+                const CreateProductScreen()
               ],
             ),
           ),

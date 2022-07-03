@@ -14,22 +14,21 @@ class VenderModel {
   List<Products>? products;
   List<Products>? sold;
 
-  VenderModel({
-    this.sId,
-    this.name,
-    this.email,
-    this.password,
-    this.phone,
-    this.panFront,
-    this.panBack,
-    this.aadharFront,
-    this.aadharBack,
-    this.status,
-    this.productin,
-    this.productout,
-    this.products,
-    this.sold,
-  });
+  VenderModel(
+      {this.sId,
+      this.name,
+      this.email,
+      this.password,
+      this.phone,
+      this.panFront,
+      this.panBack,
+      this.aadharFront,
+      this.aadharBack,
+      this.status,
+      this.productin,
+      this.productout,
+      this.products,
+      this.sold});
 
   VenderModel.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
@@ -59,7 +58,7 @@ class VenderModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['_id'] = sId;
     data['name'] = name;
     data['email'] = email;
@@ -78,28 +77,46 @@ class VenderModel {
     if (sold != null) {
       data['sold'] = sold!.map((v) => v.toJson()).toList();
     }
-
     return data;
   }
 }
 
 class Products {
+  String? sId;
   String? name;
   int? barcode;
+  String? pic;
+  int? price;
+  String? description;
   int? quantity;
 
-  Products({this.name, this.barcode, this.quantity});
+  Products(
+      {this.sId,
+      this.name,
+      this.barcode,
+      this.pic,
+      this.price,
+      this.description,
+      this.quantity});
 
   Products.fromJson(Map<String, dynamic> json) {
+    sId = json['_id'];
     name = json['Name'];
     barcode = json['Barcode'];
+    pic = json['Pic'];
+    price = json['Price'];
+    description = json['Description'];
     quantity = json['Quantity'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = sId;
     data['Name'] = name;
     data['Barcode'] = barcode;
+    data['Pic'] = pic;
+    data['Price'] = price;
+    data['Description'] = description;
     data['Quantity'] = quantity;
     return data;
   }

@@ -8,10 +8,12 @@ class Connection {
   static const String getdaysales = "$_host/api/getdaybar";
   static const String getmonthsales = "$_host/api/getmonthbar";
   static const String getyearsales = "$_host/api//getyearbar";
-  static const String createproduct = "$_host/web/setproduct";
-  static const String uplaodpic = "$_host/web/uploadpic";
+  static const String createproduct = "$_host/web/createproduct";
+  static const String getcomplaints = "$_host/web/getcomplaints";
+  static const String uplaodpic = "$_host/web/createproduct";
   static const String acceptvender = "$_host/venders/accept";
   static const String rejectvender = "$_host/venders/reject";
   static const String getapprovedvender = "$_host/venders/getapprovenders";
   static const String getpendingvender = "$_host/venders/getverifvender";
+  static const String getallproduct = "$_host/product/getallproducts";
 }

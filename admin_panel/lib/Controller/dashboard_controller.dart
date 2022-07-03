@@ -9,7 +9,7 @@ import '../Model/vender_model.dart';
 class DashBoardController extends GetxController {
   var dashboardctl = <DashboardModel>[].obs;
   var venderctl = <VenderModel>[].obs;
-  var kycpending = <VenderModel>[].obs;
+
   int get totalsolditem => _totalsold();
   int get totalrevenue => _totalrevenue();
   int get totalvenders => _totalvender();
@@ -53,19 +53,12 @@ class DashBoardController extends GetxController {
     return totalvender;
   }
 
-  _kycvenders() async {
-    for (var item in venderctl) {
-      kycpending.addIf(item.status == "pending", item);
-    }
-  }
-
   _loaddata() async {
     await Api.getdashboardapi().then((value) {
       dashboardctl.addAll(value);
     });
     await Api.getdashboardvender().then((value) {
       venderctl.addAll(value);
-      _kycvenders();
     });
   }
 }

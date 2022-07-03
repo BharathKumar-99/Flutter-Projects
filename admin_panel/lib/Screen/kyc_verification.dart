@@ -13,17 +13,15 @@ class KycVerification extends StatefulWidget {
 
 class _KycVerificationState extends State<KycVerification> {
   final vendercontroller = Get.put(VendersController());
-
   _approve(String email) async {
-    await VenderStatus.approve(email).then((val) {
-      print(val);
-    });
+    await VenderStatus.approve(email).then((val) {});
+    vendercontroller.loaddata();
   }
 
   _rejected(String email) async {
-    await VenderStatus.reject(email).then((val) {
-      print(val);
-    });
+    vendercontroller.loaddata();
+    await VenderStatus.reject(email).then((val) {});
+    vendercontroller.loaddata();
   }
 
   @override
@@ -32,18 +30,11 @@ class _KycVerificationState extends State<KycVerification> {
       children: [
         Expanded(
           flex: 3,
-          child: ListView.builder(
-              itemCount: vendercontroller.kycpending.length,
-              itemBuilder: (BuildContext context, int index) {
-                if (vendercontroller.kycpending[0].name == null) {
-                  return Center(
-                    child: Text(
-                      "data Not Found",
-                      style:
-                          GoogleFonts.lato(fontSize: 35, color: Colors.black),
-                    ),
-                  );
-                } else {
+          child: GetX<VendersController>(
+            init: VendersController(),
+            builder: (controller) => ListView.builder(
+                itemCount: controller.kycpending.length,
+                itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Card(
@@ -51,19 +42,19 @@ class _KycVerificationState extends State<KycVerification> {
                         child: Column(
                           children: [
                             Text(
-                              "Name : ${vendercontroller.kycpending[index].name!}",
+                              "Name : ${controller.kycpending[index].name!}",
                               style: GoogleFonts.lato(
                                   fontSize: 25, fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(height: 10),
                             Text(
-                              "Email : ${vendercontroller.kycpending[index].email!}",
+                              "Email : ${controller.kycpending[index].email!}",
                               style: GoogleFonts.lato(
                                   fontSize: 25, fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(height: 10),
                             Text(
-                              "Phone : ${vendercontroller.kycpending[index].phone!}",
+                              "Phone : ${controller.kycpending[index].phone!}",
                               style: GoogleFonts.lato(
                                   fontSize: 25, fontWeight: FontWeight.bold),
                             ),
@@ -71,16 +62,16 @@ class _KycVerificationState extends State<KycVerification> {
                             Row(
                               children: [
                                 Expanded(
-                                  child: Image.network(vendercontroller
-                                      .kycpending[index].panFront!),
+                                  child: Image.network(
+                                      controller.kycpending[index].panFront!),
                                 ),
                                 Expanded(
-                                  child: Image.network(vendercontroller
+                                  child: Image.network(controller
                                       .kycpending[index].aadharFront!),
                                 ),
                                 Expanded(
-                                  child: Image.network(vendercontroller
-                                      .kycpending[index].aadharBack!),
+                                  child: Image.network(
+                                      controller.kycpending[index].aadharBack!),
                                 ),
                               ],
                             ),
@@ -89,8 +80,8 @@ class _KycVerificationState extends State<KycVerification> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 ElevatedButton(
-                                  onPressed: _rejected(vendercontroller
-                                      .kycpending[index].email!),
+                                  onPressed: () => _rejected(
+                                      controller.kycpending[index].email!),
                                   style: ElevatedButton.styleFrom(
                                       shape: const RoundedRectangleBorder(
                                           borderRadius: BorderRadius.all(
@@ -104,8 +95,8 @@ class _KycVerificationState extends State<KycVerification> {
                                   child: const Text('Reject'),
                                 ),
                                 ElevatedButton(
-                                  onPressed: _approve(vendercontroller
-                                      .kycpending[index].email!),
+                                  onPressed: () => _approve(
+                                      controller.kycpending[index].email!),
                                   style: ElevatedButton.styleFrom(
                                       primary: Colors.green,
                                       shape: const RoundedRectangleBorder(
@@ -123,8 +114,8 @@ class _KycVerificationState extends State<KycVerification> {
                           ],
                         )),
                   );
-                }
-              }),
+                }),
+          ),
         ),
       ],
     );
