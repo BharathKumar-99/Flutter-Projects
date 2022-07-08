@@ -2,6 +2,7 @@ import 'package:admin_panel/Screen/ProductScreen.dart';
 import 'package:admin_panel/Screen/venderaproved.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'complaintspage.dart';
@@ -17,7 +18,7 @@ class SideNavScreen extends StatefulWidget {
 }
 
 class _SideNavScreenState extends State<SideNavScreen> {
-  PageController page = PageController();
+  PageController page = Get.put(PageController());
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +38,8 @@ class _SideNavScreenState extends State<SideNavScreen> {
               selectedTitleTextStyle: const TextStyle(color: Colors.white),
               selectedIconColor: Colors.white,
               backgroundColor: const Color.fromARGB(255, 6, 47, 170),
+              unselectedIconColor: Colors.white,
+              unselectedTitleTextStyle: const TextStyle(color: Colors.white),
 
               // decoration: BoxDecoration(
               //   borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -61,13 +64,7 @@ class _SideNavScreenState extends State<SideNavScreen> {
                 ),
               ],
             ),
-            footer: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Jr Creations',
-                style: GoogleFonts.lato(fontSize: 20, color: Colors.white),
-              ),
-            ),
+
             items: [
               SideMenuItem(
                 priority: 0,
@@ -151,7 +148,7 @@ class _SideNavScreenState extends State<SideNavScreen> {
                     ),
                   ),
                 ),
-                const CreateProductScreen()
+                const CreateProductScreen(),
               ],
             ),
           ),

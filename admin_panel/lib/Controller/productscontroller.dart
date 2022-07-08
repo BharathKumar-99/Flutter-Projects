@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 class ProductController extends GetxController {
   var productctl = <ProductsModel>[].obs;
 
-  _loaddata() async {
+  loaddata() async {
     await ProductsRest.getproducts().then((val) {
       productctl.addAll(val);
     });
@@ -13,7 +13,7 @@ class ProductController extends GetxController {
 
   @override
   void onInit() {
-    _loaddata();
+    loaddata();
     super.onInit();
   }
 }

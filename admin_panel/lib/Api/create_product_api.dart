@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:http/http.dart' as http;
@@ -22,8 +23,14 @@ class CreateproductApi {
     request.fields["pbarcode"] = barcode.toString();
     request.fields["pprice"] = price.toString();
     request.fields["pquantity"] = quantity.toString();
-    var result = await request.send().then((value) => {print(value.stream)});
+    var response = "";
+    var result = await request.send();
+    result.stream.transform(utf8.decoder).listen((value) {
+      if (value == "updated") {
+        response = value;
+      }
+    });
 
-    return result;
+    return response;
   }
 }

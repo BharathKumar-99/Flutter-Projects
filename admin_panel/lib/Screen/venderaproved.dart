@@ -1,8 +1,10 @@
+import 'dart:developer';
+
+import 'package:admin_panel/Screen/vender_info.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../Api/venderstatuschange.dart';
 import '../Controller/venders_list_controller.dart';
 
 class VenderApprovedList extends StatefulWidget {
@@ -14,90 +16,164 @@ class VenderApprovedList extends StatefulWidget {
 
 class _VenderApprovedListState extends State<VenderApprovedList> {
   final vendercontroller = Get.put(VendersController());
-  _rejected(String email) async {
-    await VenderStatus.reject(email).then((val) {});
-    vendercontroller.loaddata();
+  @override
+  void initState() {
+    log("hehe");
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Venders List"),
+        title: Text("Venders List",
+            style: GoogleFonts.lato(fontSize: 35, color: Colors.black)),
+        elevation: 0,
+        backgroundColor: Colors.white,
       ),
-      body: GetX<VendersController>(builder: (controller) {
-        return ListView.builder(
-            itemCount: controller.approvedvender.length,
-            itemBuilder: (BuildContext context, int index) {
-              if (controller.approvedvender[0].name == null) {
-                return Center(
-                  child: Text(
-                    "data Not Found",
-                    style: GoogleFonts.lato(fontSize: 35, color: Colors.black),
-                  ),
-                );
-              } else {
-                return Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Card(
-                      color: Colors.blueAccent,
-                      child: Column(
-                        children: [
-                          Text(
-                            "Name : ${controller.approvedvender[index].name!}",
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Approved  Venders Data",
+                  style: GoogleFonts.lato(fontSize: 15, color: Colors.blue),
+                ),
+              ),
+              const Divider(
+                thickness: 4,
+              ),
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                      child: Text(
+                    "Name",
+                    style: GoogleFonts.lato(fontSize: 18, color: Colors.black),
+                    textAlign: TextAlign.center,
+                  )),
+                  Expanded(
+                      child: Text(
+                    "Email",
+                    style: GoogleFonts.lato(fontSize: 18, color: Colors.black),
+                    textAlign: TextAlign.center,
+                  )),
+                  Expanded(
+                      child: Text(
+                    "Phone",
+                    style: GoogleFonts.lato(fontSize: 18, color: Colors.black),
+                    textAlign: TextAlign.center,
+                  )),
+                  Expanded(
+                      child: Text(
+                    "Status",
+                    style: GoogleFonts.lato(fontSize: 18, color: Colors.black),
+                    textAlign: TextAlign.center,
+                  )),
+                ],
+              ),
+              const SizedBox(height: 10),
+              GetX<VendersController>(builder: (controller) {
+                return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: controller.approvedvender.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      if (controller.approvedvender[0].name == null) {
+                        return Center(
+                          child: Text(
+                            "data Not Found",
                             style: GoogleFonts.lato(
-                                fontSize: 25, fontWeight: FontWeight.bold),
+                                fontSize: 35, color: Colors.black),
                           ),
-                          const SizedBox(height: 10),
-                          Text(
-                            "Email : ${controller.approvedvender[index].email!}",
-                            style: GoogleFonts.lato(
-                                fontSize: 25, fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            "Phone : ${controller.approvedvender[index].phone!}",
-                            style: GoogleFonts.lato(
-                                fontSize: 25, fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(height: 10),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Image.network(
-                                    controller.approvedvender[index].panFront!),
-                              ),
-                              Expanded(
-                                child: Image.network(controller
-                                    .approvedvender[index].aadharFront!),
-                              ),
-                              Expanded(
-                                child: Image.network(controller
-                                    .approvedvender[index].aadharBack!),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 10),
-                          ElevatedButton(
-                            onPressed: () => _rejected(
-                                controller.approvedvender[index].email!),
-                            style: ElevatedButton.styleFrom(
-                                shape: const RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(15))),
-                                primary: Colors.red,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 50, vertical: 20),
-                                textStyle: const TextStyle(
-                                    fontSize: 30, fontWeight: FontWeight.bold)),
-                            child: const Text('Reject'),
-                          ),
-                        ],
-                      )),
-                );
-              }
-            });
-      }),
+                        );
+                      } else {
+                        return Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Card(
+                              color: Colors.white,
+                              child: Column(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () =>
+                                        Get.to(() => VenderInfo(index)),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Expanded(
+                                            child: Row(
+                                          children: [
+                                            SizedBox(
+                                              height: 50,
+                                              width: 50,
+                                              child: Card(
+                                                elevation: 10,
+                                                color: Colors.white38,
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20)),
+                                                child: Image.network(controller
+                                                    .approvedvender[index]
+                                                    .profilePic!),
+                                              ),
+                                            ),
+                                            Text(
+                                              controller
+                                                  .approvedvender[index].name!,
+                                              textAlign: TextAlign.center,
+                                              style: GoogleFonts.lato(
+                                                  fontSize: 18,
+                                                  color: Colors.black),
+                                            ),
+                                          ],
+                                        )),
+                                        Expanded(
+                                            child: Text(
+                                          controller
+                                              .approvedvender[index].email!,
+                                          style: GoogleFonts.lato(
+                                              fontSize: 18,
+                                              color: Colors.black),
+                                          textAlign: TextAlign.center,
+                                        )),
+                                        Expanded(
+                                            child: Text(
+                                          controller
+                                              .approvedvender[index].phone!,
+                                          style: GoogleFonts.lato(
+                                              fontSize: 18,
+                                              color: Colors.black),
+                                          textAlign: TextAlign.center,
+                                        )),
+                                        Expanded(
+                                            child: Text(
+                                          controller
+                                                  .approvedvender[index].active!
+                                              ? "Active"
+                                              : "InActive",
+                                          style: GoogleFonts.lato(
+                                              fontSize: 18,
+                                              color: Colors.black),
+                                          textAlign: TextAlign.center,
+                                        )),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              )),
+                        );
+                      }
+                    });
+              }),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

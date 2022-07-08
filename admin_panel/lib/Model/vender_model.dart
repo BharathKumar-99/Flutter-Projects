@@ -5,10 +5,11 @@ class VenderModel {
   String? password;
   String? phone;
   String? panFront;
-  String? panBack;
+  String? profilePic;
   String? aadharFront;
   String? aadharBack;
   String? status;
+  bool? active;
   int? productin;
   int? productout;
   List<Products>? products;
@@ -21,10 +22,11 @@ class VenderModel {
       this.password,
       this.phone,
       this.panFront,
-      this.panBack,
+      this.profilePic,
       this.aadharFront,
       this.aadharBack,
       this.status,
+      this.active,
       this.productin,
       this.productout,
       this.products,
@@ -37,10 +39,11 @@ class VenderModel {
     password = json['password'];
     phone = json['phone'];
     panFront = json['pan_front'];
-    panBack = json['pan_back'];
+    profilePic = json['profile_pic'];
     aadharFront = json['aadhar_front'];
     aadharBack = json['aadhar_back'];
     status = json['status'];
+    active = json['active'];
     productin = json['productin'];
     productout = json['productout'];
     if (json['products'] != null) {
@@ -58,17 +61,18 @@ class VenderModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['_id'] = sId;
     data['name'] = name;
     data['email'] = email;
     data['password'] = password;
     data['phone'] = phone;
     data['pan_front'] = panFront;
-    data['pan_back'] = panBack;
+    data['profile_pic'] = profilePic;
     data['aadhar_front'] = aadharFront;
     data['aadhar_back'] = aadharBack;
     data['status'] = status;
+    data['active'] = active;
     data['productin'] = productin;
     data['productout'] = productout;
     if (products != null) {

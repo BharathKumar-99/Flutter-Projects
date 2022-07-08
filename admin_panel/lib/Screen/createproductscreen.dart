@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -37,24 +38,53 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
   }
 
   int barcodegenerator() {
-    var rng = Random();
-    int generatedNumber = 0;
-    for (int i = 0; i < 15; i++) {
-      generatedNumber += (rng.nextInt(9) + 1);
+    var number = "";
+    var randomnumber = Random();
+    //chnage i < 15 on your digits need
+    for (var i = 0; i < 15; i++) {
+      number = number + randomnumber.nextInt(9).toString();
     }
 
-    return generatedNumber;
+    return int.parse(number);
   }
 
   Future _createproduct() async {
-    int barcode = barcodegenerator();
-    await CreateproductApi.createproduct(
-        productnamectl.text.toString(),
-        productdescriptionctl.text.toString(),
-        int.parse(productpricectl.text),
-        int.parse(productquantityctl.text),
-        webImage,
-        barcode);
+    if (productnamectl.text == "" ||
+        productdescriptionctl.text == "" ||
+        productpricectl.text == "" ||
+        productquantityctl.text == "") {
+      Get.defaultDialog(
+          title: "error",
+          middleText: "Enter All Details",
+          backgroundColor: Colors.blue,
+          titleStyle: const TextStyle(color: Colors.white),
+          middleTextStyle: const TextStyle(color: Colors.white),
+          radius: 30);
+    } else {
+      int barcode = barcodegenerator();
+      await CreateproductApi.createproduct(
+              productnamectl.text.toString(),
+              productdescriptionctl.text.toString(),
+              int.parse(productpricectl.text),
+              int.parse(productquantityctl.text),
+              webImage,
+              barcode)
+          .then((value) {
+        Get.defaultDialog(
+            title: "Sucess",
+            middleText: "Product Created",
+            backgroundColor: Colors.blue,
+            titleStyle: const TextStyle(color: Colors.white),
+            middleTextStyle: const TextStyle(color: Colors.white),
+            radius: 30);
+        productnamectl.text = "";
+        productdescriptionctl.text = "";
+        productpricectl.text = "";
+        productquantityctl.text = "";
+        webImage.clear();
+        barcode = 0;
+      });
+    }
   }
 
   @override
@@ -86,7 +116,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                           style: GoogleFonts.lato(fontSize: 25),
                         ),
                       ),
-                      const SizedBox(height: 25),
+                      const SizedBox(height: 10),
                       TextField(
                         controller: productnamectl,
                         style: GoogleFonts.lato(),
@@ -94,7 +124,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                             hintText: "Product Name",
                             border: OutlineInputBorder()),
                       ),
-                      const SizedBox(height: 25),
+                      const SizedBox(height: 10),
                       TextField(
                         style: GoogleFonts.lato(),
                         controller: productpricectl,
@@ -102,7 +132,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                             hintText: "Product Price",
                             border: OutlineInputBorder()),
                       ),
-                      const SizedBox(height: 25),
+                      const SizedBox(height: 10),
                       TextField(
                         controller: productdescriptionctl,
                         style: GoogleFonts.lato(),
@@ -110,7 +140,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                             hintText: "Product Description",
                             border: OutlineInputBorder()),
                       ),
-                      const SizedBox(height: 25),
+                      const SizedBox(height: 10),
                       TextField(
                         controller: productquantityctl,
                         style: GoogleFonts.lato(),
@@ -118,7 +148,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                             hintText: "Product quantity",
                             border: OutlineInputBorder()),
                       ),
-                      const SizedBox(height: 25),
+                      const SizedBox(height: 10),
                       Row(
                         children: [
                           Align(
@@ -133,7 +163,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                           Text(iamgeselected)
                         ],
                       ),
-                      const SizedBox(height: 25),
+                      const SizedBox(height: 10),
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(

@@ -1,4 +1,5 @@
 import 'package:admin_panel/Controller/productscontroller.dart';
+import 'package:admin_panel/Screen/productinfopage.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -13,67 +14,132 @@ class ProductPage extends StatefulWidget {
 
 class _ProductPageState extends State<ProductPage> {
   final productcontroller = Get.find<ProductController>();
+  final pagecontroller = Get.find<PageController>();
+
   @override
   Widget build(BuildContext context) {
     print(productcontroller.productctl.length);
-    return SizedBox(
-      height: 250,
-      child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: productcontroller.productctl.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Wrap(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Card(
-                    color: const Color.fromARGB(94, 33, 149, 243),
-                    margin: EdgeInsets.zero,
-                    elevation: 0.4,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                              height: 150,
-                              width: 150,
-                              child: Image.network(
-                                  productcontroller.productctl[index].pic!)),
-                          const SizedBox(height: 10),
-                          Text(
-                            productcontroller.productctl[index].name!,
-                            style: GoogleFonts.lato(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                          const SizedBox(height: 5),
-                          Text(
-                            "Rs: ${productcontroller.productctl[index].price!}",
-                            style: GoogleFonts.lato(
-                                fontSize: 10,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                          const SizedBox(height: 5),
-                          Text(
-                            "X${productcontroller.productctl[index].quantity!}",
-                            style: GoogleFonts.lato(
-                                fontSize: 10,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            );
-          }),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Products List",
+            style: GoogleFonts.lato(fontSize: 35, color: Colors.black)),
+        backgroundColor: Colors.white,
+        elevation: 0,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(25.0),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                      child: Text(
+                    "Name",
+                    style: GoogleFonts.lato(fontSize: 18, color: Colors.grey),
+                    textAlign: TextAlign.center,
+                  )),
+                  Expanded(
+                      child: Text(
+                    "Price",
+                    style: GoogleFonts.lato(fontSize: 18, color: Colors.grey),
+                    textAlign: TextAlign.center,
+                  )),
+                  Expanded(
+                      child: Text(
+                    "Quantity",
+                    style: GoogleFonts.lato(fontSize: 18, color: Colors.grey),
+                    textAlign: TextAlign.center,
+                  )),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Card(
+                color: Colors.white70,
+                child: GetX<ProductController>(builder: (controller) {
+                  return ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: controller.productctl.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        if (controller.productctl[0].name == null) {
+                          return Center(
+                            child: Text(
+                              "data Not Found",
+                              style: GoogleFonts.lato(
+                                  fontSize: 35, color: Colors.black),
+                            ),
+                          );
+                        } else {
+                          return Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Column(
+                              children: [
+                                GestureDetector(
+                                  onTap: () => {ProductInfoPage(index: index)},
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Expanded(
+                                        child: Row(
+                                          children: [
+                                            SizedBox(
+                                              height: 50,
+                                              width: 50,
+                                              child: Card(
+                                                elevation: 10,
+                                                color: Colors.white38,
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20)),
+                                                child: Image.network(
+                                                    productcontroller
+                                                        .productctl[index]
+                                                        .pic!),
+                                              ),
+                                            ),
+                                            Text(
+                                              controller
+                                                  .productctl[index].name!,
+                                              textAlign: TextAlign.center,
+                                              style: GoogleFonts.lato(
+                                                  fontSize: 18,
+                                                  color: Colors.grey),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(
+                                          child: Text(
+                                        controller.productctl[index].price!
+                                            .toString(),
+                                        style: GoogleFonts.lato(
+                                            fontSize: 18, color: Colors.grey),
+                                        textAlign: TextAlign.center,
+                                      )),
+                                      Expanded(
+                                          child: Text(
+                                        controller.productctl[index].quantity!
+                                            .toString(),
+                                        style: GoogleFonts.lato(
+                                            fontSize: 18, color: Colors.grey),
+                                        textAlign: TextAlign.center,
+                                      )),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          );
+                        }
+                      });
+                }),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

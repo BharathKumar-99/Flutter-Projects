@@ -22,4 +22,15 @@ class ProductsRest {
     }
     return model;
   }
+
+  static updatequantity(String id, String quantity) async {
+    try {
+      await client.post(Uri.parse(Connection.setproductquantity),
+          body: {"Barcode": id, "quantity": quantity}).then((val) {
+        return "yes";
+      });
+    } catch (e) {
+      log(e.toString());
+    }
+  }
 }

@@ -53,4 +53,10 @@ class VenderStatus {
     }
     return model;
   }
+
+  static statuschange(String email, bool status) async {
+    await dio.post(Connection.statusvender,
+        data: {"email": email, "status": status}).then((value) => {});
+    return "Done";
+  }
 }

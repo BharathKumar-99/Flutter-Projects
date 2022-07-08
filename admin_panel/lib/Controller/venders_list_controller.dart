@@ -14,12 +14,9 @@ class VendersController extends GetxController {
   }
 
   loaddata() async {
-    if (kycpending.isEmpty) {
-      kycpending.clear();
-    }
-    if (approvedvender.isEmpty) {
-      approvedvender.clear();
-    }
+    kycpending.clear();
+
+    approvedvender.clear();
 
     await VenderStatus.pendingvender().then((value) {
       kycpending.addAll(value);

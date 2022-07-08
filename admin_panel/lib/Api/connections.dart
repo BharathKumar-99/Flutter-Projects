@@ -16,4 +16,6 @@ class Connection {
   static const String getapprovedvender = "$_host/venders/getapprovenders";
   static const String getpendingvender = "$_host/venders/getverifvender";
   static const String getallproduct = "$_host/product/getallproducts";
+  static const String setproductquantity = "$_host/product/updateproduct";
+  static const String statusvender = "$_host/venders/statuschange";
 }
