@@ -16,6 +16,11 @@ class Connection {
   static const String getapprovedvender = "$_host/venders/getapprovenders";
   static const String getpendingvender = "$_host/venders/getverifvender";
   static const String getallproduct = "$_host/product/getallproducts";
+  static const String deleteproduct = "$_host/product/deleteproduct";
   static const String setproductquantity = "$_host/product/updateproduct";
   static const String statusvender = "$_host/venders/statuschange";
+  static const String customerlist = "$_host/product/getallcustomer";
+  static const String loginapi = "$_host/login";
+  static const String registerapi = "$_host/register";
+  static const String sendnotification = "$_host/notification/sendnotification";
 }

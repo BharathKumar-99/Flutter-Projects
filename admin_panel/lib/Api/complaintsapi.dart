@@ -12,7 +12,6 @@ class ComplaintsApi {
     List<ComplaintsModel> model = [];
     try {
       await client.get(Uri.parse(Connection.getcomplaints)).then((val) {
-        print(val.body);
         for (final item in json.decode(val.body)) {
           model.add(ComplaintsModel.fromJson(item));
         }

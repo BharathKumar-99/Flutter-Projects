@@ -26,7 +26,7 @@ class _VenderApprovedListState extends State<VenderApprovedList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Venders List",
+        title: Text("Vendors List",
             style: GoogleFonts.lato(fontSize: 35, color: Colors.black)),
         elevation: 0,
         backgroundColor: Colors.white,
@@ -39,7 +39,7 @@ class _VenderApprovedListState extends State<VenderApprovedList> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Approved  Venders Data",
+                  "Approved  Vendors Data",
                   style: GoogleFonts.lato(fontSize: 15, color: Colors.blue),
                 ),
               ),

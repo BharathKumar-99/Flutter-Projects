@@ -6,6 +6,7 @@ class ProductController extends GetxController {
   var productctl = <ProductsModel>[].obs;
 
   loaddata() async {
+    clear();
     await ProductsRest.getproducts().then((val) {
       productctl.addAll(val);
     });
@@ -15,5 +16,14 @@ class ProductController extends GetxController {
   void onInit() {
     loaddata();
     super.onInit();
+  }
+
+  clear() {
+    productctl.clear();
+  }
+
+  relaod() {
+    clear();
+    loaddata();
   }
 }

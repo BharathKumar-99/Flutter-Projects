@@ -8,7 +8,6 @@ class ComplaintController extends GetxController {
 
   loaddata() async {
     await ComplaintsApi.getcomplaints().then((value) {
-      print(value);
       complaintslist.addAll(value);
     });
   }

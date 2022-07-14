@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:admin_panel/Controller/venders_list_controller.dart';
 import 'package:dio/dio.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 import '../Model/vender_model.dart';
@@ -14,11 +16,13 @@ class VenderStatus {
   static approve(String email) async {
     await dio.post(Connection.acceptvender,
         data: {"email": email}).then((value) => {log(value.data)});
+    Get.find<VendersController>().relaod();
   }
 
   static reject(String email) async {
     await dio.post(Connection.rejectvender,
         data: {"email": email}).then((value) => {log(value.data)});
+    Get.find<VendersController>().relaod();
   }
 
   static approvedvender() async {
@@ -40,6 +44,7 @@ class VenderStatus {
     List<VenderModel> model = [];
     try {
       await client.get(Uri.parse(Connection.getpendingvender)).then((value) => {
+            log(value.body),
             if (value.body == "[]")
               {
                 model = [],
@@ -51,12 +56,17 @@ class VenderStatus {
     } catch (e) {
       log("pen$e");
     }
+
     return model;
   }
 
-  static statuschange(String email, bool status) async {
+  static statuschange(String email, bool status, int index) async {
+    int indexs = index;
     await dio.post(Connection.statusvender,
         data: {"email": email, "status": status}).then((value) => {});
-    return "Done";
+    Get.find<VendersController>().relaod();
+
+    log(indexs.toString());
+    return indexs;
   }
 }

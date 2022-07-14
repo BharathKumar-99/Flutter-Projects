@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:admin_panel/Api/productsapi.dart';
+import 'package:admin_panel/Screen/printbarcode.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -35,6 +36,8 @@ class _ProductInfoPageState extends State<ProductInfoPage> {
   _init() {
     quantity = productcontroller.productctl[widget.index].quantity!;
   }
+
+  _print() async {}
 
   @override
   void initState() {
@@ -175,7 +178,10 @@ class _ProductInfoPageState extends State<ProductInfoPage> {
                         ),
                       ),
                       ElevatedButton(
-                          onPressed: () {}, child: const Text("Print Barcode"))
+                          onPressed: () => Get.to(() => PrintBarcode(
+                                index: widget.index,
+                              )),
+                          child: const Text("Print Barcode"))
                     ],
                   ),
                 ),

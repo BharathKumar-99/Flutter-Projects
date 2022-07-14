@@ -1,0 +1,63 @@
+{"data":{"id":9,"owner_id":4,"payment_provider_id":1,"name":"BRANDED 10",
+"url":"https:\/\/d2web.storenxt.in\/","store_type_id":11,"store_number":"1",
+"tin":"1","description":null,"image":null,"favicon":null,"employee_fcm_server_key":
+"AAAANMOgx4Y:APA91bGI3vamZ1wo4Lzw__4I85Y3uM05m8qMUW0Zf4Sm5XWuxoeijTbw834L9XbXYHetK_mpKX7zT0OjJRCSNrUZ8gGYOzSZ2CO3g6l9FI2pxQvr-rUOz7AdfRORHemdXd7",
+"customer_fcm_server_key":"AAAAG82ftY0:APA91bEeFb5i9pT2K9Jg89NYgbYwPm3mQ18PRgs8A6hIx7qlIX8nKvcv1vtXnFm3O0D76jn2kA0Bl4vuDRZFwwgxynb6x9oZ70iN6e-3eso-tQGF4M2zrHPOC5IQ7VjckB3AoIBO4o7G",
+"validity_till"
+:"2024-07-31 00:00:00","device_count":1,"door_number":"1","street_name":"WHITEFIELD"
+,"country_id":1,"state_id":3,"city_id":3,"phone":null,"email":null,"delivery_radius"
+:null,"delivery_charges":30,"package_charges":null,"service_charges":null,
+"min_purchase_amount":600,"deliver_in_minutes":120,"order_process_in_minutes":120,
+"is_store_nxt_razorpay_account_number":0,"store_nxt_razorpay_commission_type":1,
+"store_nxt_razorpay_percentage":null,"store_nxt_razorpay_fixed_amount":null,
+"micro_nxt_partner_percentage":null,"availability":1,"is_admin_approved":1,
+"latitude":"12.98171460","longitude":"77.75489980","tax_type":1,"is_subscription":0,
+"is_continuous_billing":0,"bill_prefix":null,"is_online_sale":1,"is_food_type":0,
+"from_time":null,"to_time":null,"postal_code":null,"is_third_party_delivery":0,
+"free_delivery_limit":null,"is_sell_anywhere":0,"show_out_of_stock":0,
+"is_default_warehouse_select":0,"created_at":"2022-06-13 12:02:23",
+"updated_at":"2022-07-11 09:43:38","deleted_at":null,"default_slot"
+:null,"additional_slot":null,"currency":"INR","sms_suffix":null,
+"is_transport":0,"vendor_name":null,"offer_max_count":3
+,"accounts_type":0,"auto_order_approve":0,"powered_by":null,
+"store_rating":0,"play_store_url":null,"app_store_url":null,
+"borzo_callbacktoken":null,"borzo_token_id":null,"borzo_clientid":null,
+"shiprocket_password":null,"instant_delivery":"0","shiprocket_email":null,
+"primary_store_id":1,"borzo_flat_fee":0,"borzo_flat_fee_charges"
+:null,"store_delivery":1,"borzo_delivery":0,"shiprocket_delivery":0,
+"borzo_api_url":null,"is_tracking":1,"tracking_days":90,
+"store_logo_url":null,"max_coupon":3,"is_return_able":0,"max_days":null,
+"return_description":null,"is_message_mode":1,"mode_of_message_sms":null,
+"mode_of_message_email":null,"store_updated_at":"2022-07-02 18:54:52",
+"is_sync":null,"publish_unique_id":928,"sku_count":232,
+"sku_max_selling_price":1655.85,"supplier_count":0,
+"employee_count":0,"customer_count":3,"owner":{"id":4,"first_name":"Vijay",
+"last_name":null,"business_name":"BRANDED 10","mobile":"9792456325",
+"email":null,"is_mobile_verified":1,"is_email_verified":0,"address":"WHITEFIELD",
+"description":null,"sms_suffix":"MICNXT","profile_image":null,"country_id":1,
+"sms_provider_id":1,"vendor_key":"MICNXT","sms_auth_token":"e534b1883e12c37bfc38260aac6899e3",
+"google_sms_otp_token":"XhcRQNz0jc2","google_map_api_key":null,"google_map_whitelist_domain":null,
+"android_app_link":null,"ios_app_link":null,"default_reward_store_id":null
+,"s3_folder":"branded10-images","is_centralize_catalog":1,"created_at":"2022-06-13 11:41:39",
+"updated_at":"2022-06-13 11:42:21","deleted_at":null,"is_sub_order":1},
+"store_type":{"id":11,"name":"Fashion Outlet","created_at":"2022-05-19 15:27:21",
+"updated_at":"2022-05-19 15:27:21","deleted_at":null},
+"country":{"id":1,"name":"India","short_name":"IN","phone_code":91,
+"mobile_min_length":10,"mobile_max_length":10,"created_at":"2022-05-19 15:27:20"
+,"updated_at":"2022-05-19 15:27:20","deleted_at":null},"state":
+{"id":3,"name":"Karnataka","country_id":1,"created_at":"2022-05-19 15:27:20",
+"updated_at":"2022-05-19 15:27:20","deleted_at":null},"city":{"id":3,
+"name":"Banglore","state_id":3,"created_at":"2022-05-19 15:27:20","updated_at"
+:"2022-05-19 15:27:20","deleted_at":null},"payment_types"
+:[{"id":1,"name":"Cash On Delivery","description":"COD","created_at":"2022-05-19 15:27:21"
+,"updated_at":"2022-05-19 15:27:21","deleted_at":null,"pivot":{"store_id":9,
+"payment_type_id":1}},{"id":2,"name":"Online Payment","description":null,
+"created_at":"2022-05-19 15:27:21","updated_at":"2022-05-19 15:27:21",
+"deleted_at":null,"pivot":{"store_id":9,"payment_type_id":2}}],
+"delivery_types":[{"id":1,"name":"Door Delivery","description":null,
+"created_at":"2022-05-19 15:27:21","updated_at":"2022-05-19 15:27:21",
+"deleted_at":null,"pivot":{"store_id":9,"delivery_type_id":1}},{"id":2,
+"name":"Store Pickup","description":null,"created_at":"2022-05-19 15:27:21"
+,"updated_at":"2022-05-19 15:27:21","deleted_at":null,"pivot":{"store_id":9
+,"delivery_type_id":2}}],"payment_providers":[{"id":1,"name":"RazorPay",
+"meta":null,"created_at":"2022-05-19 15:27:21","updated_at":"2022-05-19 15:27:21"}]},"message":""}

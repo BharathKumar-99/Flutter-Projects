@@ -14,10 +14,7 @@ class VendersController extends GetxController {
   }
 
   loaddata() async {
-    kycpending.clear();
-
-    approvedvender.clear();
-
+    clear();
     await VenderStatus.pendingvender().then((value) {
       kycpending.addAll(value);
     });
@@ -25,5 +22,21 @@ class VendersController extends GetxController {
     await VenderStatus.approvedvender().then((value) {
       approvedvender.addAll(value);
     });
+  }
+
+  relaod() async {
+    clear();
+    await VenderStatus.pendingvender().then((value) {
+      kycpending.addAll(value);
+    });
+    await VenderStatus.approvedvender().then((value) {
+      approvedvender.addAll(value);
+    });
+    update();
+  }
+
+  clear() {
+    kycpending.clear();
+    approvedvender.clear();
   }
 }

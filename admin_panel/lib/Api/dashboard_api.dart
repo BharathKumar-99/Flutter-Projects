@@ -33,7 +33,6 @@ class Api {
     List<VenderModel> model = [];
     try {
       await client.get(Uri.parse(Connection.dashboardvender)).then((value) => {
-            print(value.body),
             for (var item in json.decode("[${value.body}]"))
               model.add(VenderModel.fromJson(item)),
           });

@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../Api/productsapi.dart';
+
 class ProductPage extends StatefulWidget {
   const ProductPage({Key? key}) : super(key: key);
 
@@ -16,9 +18,12 @@ class _ProductPageState extends State<ProductPage> {
   final productcontroller = Get.find<ProductController>();
   final pagecontroller = Get.find<PageController>();
 
+  _remove(String Barcode) async {
+    await ProductsRest.delete(Barcode);
+  }
+
   @override
   Widget build(BuildContext context) {
-    print(productcontroller.productctl.length);
     return Scaffold(
       appBar: AppBar(
         title: Text("Products List",
@@ -37,19 +42,19 @@ class _ProductPageState extends State<ProductPage> {
                   Expanded(
                       child: Text(
                     "Name",
-                    style: GoogleFonts.lato(fontSize: 18, color: Colors.grey),
+                    style: GoogleFonts.lato(fontSize: 18, color: Colors.black),
                     textAlign: TextAlign.center,
                   )),
                   Expanded(
                       child: Text(
                     "Price",
-                    style: GoogleFonts.lato(fontSize: 18, color: Colors.grey),
+                    style: GoogleFonts.lato(fontSize: 18, color: Colors.black),
                     textAlign: TextAlign.center,
                   )),
                   Expanded(
                       child: Text(
                     "Quantity",
-                    style: GoogleFonts.lato(fontSize: 18, color: Colors.grey),
+                    style: GoogleFonts.lato(fontSize: 18, color: Colors.black),
                     textAlign: TextAlign.center,
                   )),
                 ],
@@ -76,7 +81,9 @@ class _ProductPageState extends State<ProductPage> {
                             child: Column(
                               children: [
                                 GestureDetector(
-                                  onTap: () => {ProductInfoPage(index: index)},
+                                  onTap: () => Get.to(() => ProductInfoPage(
+                                        index: index,
+                                      )),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -105,7 +112,7 @@ class _ProductPageState extends State<ProductPage> {
                                               textAlign: TextAlign.center,
                                               style: GoogleFonts.lato(
                                                   fontSize: 18,
-                                                  color: Colors.grey),
+                                                  color: Colors.black),
                                             )
                                           ],
                                         ),
@@ -115,16 +122,30 @@ class _ProductPageState extends State<ProductPage> {
                                         controller.productctl[index].price!
                                             .toString(),
                                         style: GoogleFonts.lato(
-                                            fontSize: 18, color: Colors.grey),
+                                            fontSize: 18, color: Colors.black),
                                         textAlign: TextAlign.center,
                                       )),
                                       Expanded(
-                                          child: Text(
-                                        controller.productctl[index].quantity!
-                                            .toString(),
-                                        style: GoogleFonts.lato(
-                                            fontSize: 18, color: Colors.grey),
-                                        textAlign: TextAlign.center,
+                                          child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          Text(
+                                            controller
+                                                .productctl[index].quantity!
+                                                .toString(),
+                                            style: GoogleFonts.lato(
+                                                fontSize: 18,
+                                                color: Colors.black),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          IconButton(
+                                              onPressed: () => _remove(
+                                                  controller
+                                                      .productctl[index].barcode
+                                                      .toString()),
+                                              icon: const Icon(Icons.delete))
+                                        ],
                                       )),
                                     ],
                                   ),

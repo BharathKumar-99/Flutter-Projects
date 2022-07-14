@@ -1,4 +1,5 @@
 import 'package:admin_panel/Screen/ProductScreen.dart';
+import 'package:admin_panel/Screen/createadminorvender.dart';
 import 'package:admin_panel/Screen/venderaproved.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
@@ -7,8 +8,10 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'complaintspage.dart';
 import 'createproductscreen.dart';
+import 'custmerlist.dart';
 import 'dash_board.dart';
 import 'kyc_verification.dart';
+import 'sendnotification.dart';
 
 class SideNavScreen extends StatefulWidget {
   const SideNavScreen({Key? key}) : super(key: key);
@@ -92,11 +95,11 @@ class _SideNavScreenState extends State<SideNavScreen> {
               ),
               SideMenuItem(
                 priority: 3,
-                title: 'Product',
+                title: 'CustomerList',
                 onTap: () {
                   page.jumpToPage(3);
                 },
-                icon: const Icon(Icons.shopping_bag_rounded),
+                icon: const Icon(Icons.person),
               ),
               SideMenuItem(
                 priority: 4,
@@ -124,6 +127,22 @@ class _SideNavScreenState extends State<SideNavScreen> {
               ),
               SideMenuItem(
                 priority: 7,
+                title: 'Product',
+                onTap: () {
+                  page.jumpToPage(7);
+                },
+                icon: const Icon(Icons.shopping_bag_rounded),
+              ),
+              SideMenuItem(
+                priority: 8,
+                title: 'Create Vender',
+                onTap: () {
+                  page.jumpToPage(8);
+                },
+                icon: const Icon(Icons.person_add),
+              ),
+              SideMenuItem(
+                priority: 9,
                 title: 'Logout',
                 onTap: () async {},
                 icon: const Icon(Icons.exit_to_app),
@@ -133,22 +152,16 @@ class _SideNavScreenState extends State<SideNavScreen> {
           Expanded(
             child: PageView(
               controller: page,
-              children: [
-                const Dashboard(),
-                const KycVerification(),
-                const VenderApprovedList(),
-                const ProductPage(),
-                const ComplaintsScreen(),
-                Container(
-                  color: Colors.white,
-                  child: const Center(
-                    child: Text(
-                      'No New Notifications',
-                      style: TextStyle(fontSize: 35),
-                    ),
-                  ),
-                ),
-                const CreateProductScreen(),
+              children: const [
+                Dashboard(),
+                KycVerification(),
+                VenderApprovedList(),
+                CustmerDetails(),
+                ComplaintsScreen(),
+                Notifications(),
+                CreateProductScreen(),
+                ProductPage(),
+                CreateVenderScreen()
               ],
             ),
           ),
